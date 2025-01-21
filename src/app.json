@@ -6,19 +6,11 @@
     "android": {
       "experimental": {
         "newArchEnabled": true
-      },
-      "package": "com.xriccard0x.smartpapp"
+      }
     },
     "ios": {
       "experimental": {
         "newArchEnabled": true
-      },
-      "bundleIdentifier": "com.xriccard0x.smartpapp",
-      "newArchEnabled": true
-    },
-    "extra": {
-      "eas": {
-        "projectId": "5d2a3c2a-d2d5-419f-8ffb-04e377bafba7"
       }
     }
   }
