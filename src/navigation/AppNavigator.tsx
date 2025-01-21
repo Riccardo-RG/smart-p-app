@@ -14,7 +14,7 @@ type IconMapping = {
 };
 
 const ICON_MAPPING: IconMapping = {
-  Main: {
+  Home: {
     active: "home",
     inactive: "home-outline",
   },
@@ -39,9 +39,10 @@ const AppNavigator: React.FC = () => {
         id={undefined}
         screenOptions={({ route }) => ({
           headerStyle: { backgroundColor: theme.primaryColor },
+          footerStyle: { backgroundColor: theme.backgroundColor },
           headerTintColor: theme.textColor,
-          tabBarStyle: { backgroundColor: theme.backgroundColor },
-          tabBarActiveTintColor: theme.primaryColor,
+          tabBarStyle: { backgroundColor: theme.primaryColor },
+          tabBarActiveTintColor: theme.textColor,
           tabBarInactiveTintColor: theme.textColor,
           tabBarIcon: ({ focused, color, size }) => {
             const iconName =
@@ -50,7 +51,7 @@ const AppNavigator: React.FC = () => {
           },
         })}
       >
-        <BottomTabs.Screen name="Main" component={MainView} />
+        <BottomTabs.Screen name="Home" component={MainView} />
         <BottomTabs.Screen name="Memories" component={MemoriesView} />
         <BottomTabs.Screen name="Settings" component={Settings} />
       </BottomTabs.Navigator>

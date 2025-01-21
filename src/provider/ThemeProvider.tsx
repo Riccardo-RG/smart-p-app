@@ -7,6 +7,7 @@ interface Theme {
   barStyle: "light-content" | "dark-content";
   barColor?: string;
   primaryColor: string;
+  secondaryColor?: string;
 }
 
 interface ThemeContextType {
@@ -26,16 +27,18 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
 
   const theme: Theme = isDarkMode
     ? {
-        backgroundColor: "#000", // Sfondo scuro
-        textColor: "#fff", // Testo chiaro
+        backgroundColor: "#000",
+        textColor: "#fff",
         barStyle: "dark-content",
         primaryColor: "#912122",
+        secondaryColor: "#01B788",
       }
     : {
         backgroundColor: "#fff",
         textColor: "#000",
         barStyle: "light-content",
         primaryColor: "#7C4DFF",
+        secondaryColor: "#01B788",
       };
 
   return (
