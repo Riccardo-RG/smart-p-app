@@ -1,6 +1,8 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
+
 import { useTheme } from "../provider/ThemeProvider";
+import { ThemeSwitcher } from "../component/ThemeSwitcher";
 
 const SettingsScreen: React.FC = () => {
   const { theme } = useTheme();
@@ -12,6 +14,7 @@ const SettingsScreen: React.FC = () => {
       <Text style={[styles.text, { color: theme.textColor }]}>
         This is the Settings Screen
       </Text>
+      <ThemeSwitcher />
     </View>
   );
 };

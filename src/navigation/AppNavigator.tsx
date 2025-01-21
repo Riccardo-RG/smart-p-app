@@ -1,28 +1,59 @@
-import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import MainView from "../MainView";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { Ionicons } from "@expo/vector-icons";
 import { useTheme } from "../provider/ThemeProvider";
+import MainView from "../screens/MainViewScreen";
+import MemoriesView from "../screens/MemoriesScreen";
+import Settings from "../screens/SettingsScreen";
 
-const Stack = createNativeStackNavigator();
+type IconMapping = {
+  [key: string]: {
+    active: keyof typeof Ionicons.glyphMap;
+    inactive: keyof typeof Ionicons.glyphMap;
+  };
+};
+
+const ICON_MAPPING: IconMapping = {
+  Main: {
+    active: "home",
+    inactive: "home-outline",
+  },
+  Memories: {
+    active: "book",
+    inactive: "book-outline",
+  },
+  Settings: {
+    active: "settings",
+    inactive: "settings-outline",
+  },
+};
+
+const BottomTabs = createBottomTabNavigator();
 
 const AppNavigator: React.FC = () => {
   const { theme } = useTheme();
 
   return (
     <NavigationContainer>
-      <Stack.Navigator id={undefined}>
-        <Stack.Screen
-          name="Main"
-          component={MainView}
-          options={{
-            headerShown: true,
-            headerStyle: {
-              backgroundColor: theme.primaryColor,
-            },
-          }}
-        />
-      </Stack.Navigator>
+      <BottomTabs.Navigator
+        id={undefined}
+        screenOptions={({ route }) => ({
+          headerStyle: { backgroundColor: theme.primaryColor },
+          headerTintColor: theme.textColor,
+          tabBarStyle: { backgroundColor: theme.backgroundColor },
+          tabBarActiveTintColor: theme.primaryColor,
+          tabBarInactiveTintColor: theme.textColor,
+          tabBarIcon: ({ focused, color, size }) => {
+            const iconName =
+              ICON_MAPPING[route.name][focused ? "active" : "inactive"];
+            return <Ionicons name={iconName} size={size} color={color} />;
+          },
+        })}
+      >
+        <BottomTabs.Screen name="Main" component={MainView} />
+        <BottomTabs.Screen name="Memories" component={MemoriesView} />
+        <BottomTabs.Screen name="Settings" component={Settings} />
+      </BottomTabs.Navigator>
     </NavigationContainer>
   );
 };

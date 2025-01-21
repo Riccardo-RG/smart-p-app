@@ -28,13 +28,13 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
     ? {
         backgroundColor: "#000", // Sfondo scuro
         textColor: "#fff", // Testo chiaro
-        barStyle: "light-content",
+        barStyle: "dark-content",
         primaryColor: "#912122",
       }
     : {
-        backgroundColor: "#fff", // Sfondo chiaro
-        textColor: "#000", // Testo scuro
-        barStyle: "dark-content",
+        backgroundColor: "#fff",
+        textColor: "#000",
+        barStyle: "light-content",
         primaryColor: "#7C4DFF",
       };
 
@@ -54,16 +54,3 @@ export const useTheme = (): ThemeContextType => {
   }
   return context;
 };
-
-/* 
-  NOTA: Mantengo lo StyleSheet anche se qui non viene utilizzato, 
-  per conservare fedelmente tutte le righe del codice originale.
-*/
-const styles = StyleSheet.create({
-  switchContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-    margin: 20,
-  },
-});

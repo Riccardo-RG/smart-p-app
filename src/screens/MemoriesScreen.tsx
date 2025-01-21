@@ -2,7 +2,7 @@ import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 import { useTheme } from "../provider/ThemeProvider";
 
-const HomeScreen: React.FC = () => {
+const MemoriesScreen: React.FC = () => {
   const { theme } = useTheme();
 
   return (
@@ -10,7 +10,7 @@ const HomeScreen: React.FC = () => {
       style={[styles.container, { backgroundColor: theme.backgroundColor }]}
     >
       <Text style={[styles.text, { color: theme.textColor }]}>
-        This is the Home Screen
+        This is the Memories Screen
       </Text>
     </View>
   );
@@ -27,4 +27,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default HomeScreen;
+export default MemoriesScreen;
