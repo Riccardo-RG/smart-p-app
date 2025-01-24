@@ -1,20 +1,29 @@
-import React, { useEffect } from "react";
-import {
-  StyleSheet,
-  TextInput,
-  View,
-  StatusBar,
-  Text,
-  TouchableOpacity,
-} from "react-native";
+import React, { useEffect, useState } from "react";
+import { StyleSheet, View, StatusBar, Text } from "react-native";
 import { useTheme } from "../provider/ThemeProvider";
-import { MaterialIcons } from "@expo/vector-icons";
-import CategoriesList from "../component/CategoriesList";
+import { StackNavigationProp } from "@react-navigation/stack";
+import { useNavigation } from "@react-navigation/native"; // Importa useNavigation
 import AddPropsButton from "../component/AddingPropsButton";
 import SearchBar from "../component/SearchBar";
+import FilterButton from "../component/FilterButton";
+import SmartList from "../component/CategoriesList";
 
 const MainView: React.FC = () => {
   const { theme } = useTheme();
+
+  type RootStackParamList = {
+    PropsForm: undefined;
+    // add other routes here
+  };
+
+  type MainViewScreenNavigationProp = StackNavigationProp<
+    RootStackParamList,
+    "PropsForm"
+  >;
+
+  const navigation = useNavigation<MainViewScreenNavigationProp>(); // Usa l'hook useNavigation
+  const [activeFilter, setActiveFilter] = useState("Categorie");
+
   const categories = [
     "dreams",
     "Day memo",
@@ -32,6 +41,20 @@ const MainView: React.FC = () => {
     "Other",
   ];
 
+  const propsList = [
+    "ei mom",
+    "work sentiment",
+    "diary",
+    "music text",
+    "finance count",
+    "health",
+    "work",
+    "study",
+    "travel",
+    "family",
+    "friends",
+  ];
+
   useEffect(() => {
     StatusBar.setBarStyle(theme.barStyle);
   }, [theme]);
@@ -40,17 +63,39 @@ const MainView: React.FC = () => {
     <View
       style={[styles.container, { backgroundColor: theme.backgroundColor }]}
     >
-      <Text style={[styles.title, { color: theme.textColor }]}>Props List</Text>
+      <View style={styles.header}>
+        <Text
+          style={[{ color: theme.textColor, fontSize: 24, fontWeight: "bold" }]}
+        >
+          Props List
+        </Text>
+        <View style={styles.filterButton}>
+          <FilterButton
+            label="Categorie"
+            isActive={activeFilter === "Categorie"}
+            onPress={() => setActiveFilter("Categorie")}
+          />
+          <FilterButton
+            label="All props"
+            isActive={activeFilter === "All props"}
+            onPress={() => setActiveFilter("All props")}
+          />
+        </View>
+      </View>
 
       <SearchBar />
 
       <View style={styles.listContainer}>
-        <CategoriesList categories={categories} />
+        {activeFilter === "Categorie" ? (
+          <SmartList categories={categories} />
+        ) : (
+          <SmartList categories={propsList} />
+        )}
       </View>
 
       <AddPropsButton
         title="Add new prop +"
-        onPress={() => console.log("CustomButton pressed")}
+        onPress={() => navigation.navigate("PropsForm")} // Usa navigation da useNavigation
       />
     </View>
   );
@@ -62,27 +107,16 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     backgroundColor: "#ffffff",
   },
-  title: {
+  header: {
     marginTop: 22,
-    fontSize: 24,
-    fontWeight: "bold",
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-between",
     textAlign: "center",
   },
-  searchContainer: {
+  filterButton: {
+    display: "flex",
     flexDirection: "row",
-    alignItems: "center",
-    borderRadius: 8,
-    paddingHorizontal: 10,
-    paddingVertical: 5,
-    width: "100%",
-    marginTop: 20,
-  },
-  searchIcon: {
-    marginRight: 10,
-  },
-  searchInput: {
-    flex: 1,
-    fontSize: 16,
   },
   listContainer: {
     flex: 1,

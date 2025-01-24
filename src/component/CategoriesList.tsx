@@ -7,20 +7,20 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { useTheme } from "../provider/ThemeProvider";
-import { MaterialIcons } from "@expo/vector-icons"; // Import vector icons
+import { MaterialIcons } from "@expo/vector-icons";
 
-interface CategoryListProps {
+interface SmartList {
   categories: string[];
 }
 
-const CategoriesList: React.FC<CategoryListProps> = ({ categories }) => {
+const SmartList: React.FC<SmartList> = ({ categories }) => {
   const { theme } = useTheme();
 
   const styles = StyleSheet.create({
     itemContainer: {
-      flexDirection: "row", // Align items in a row
-      alignItems: "center", // Center the text and icon vertically
-      justifyContent: "space-between", // Space between text and icon
+      flexDirection: "row",
+      alignItems: "center",
+      justifyContent: "space-between",
       padding: 10,
       marginVertical: 8,
       borderRadius: 8,
@@ -57,4 +57,4 @@ const CategoriesList: React.FC<CategoryListProps> = ({ categories }) => {
   );
 };
 
-export default CategoriesList;
+export default SmartList;

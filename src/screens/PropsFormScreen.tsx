@@ -2,7 +2,7 @@ import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 import { useTheme } from "../provider/ThemeProvider";
 
-const AlertScreen: React.FC = () => {
+const PropsFormScreen: React.FC = () => {
   const { theme } = useTheme();
 
   return (
@@ -10,7 +10,7 @@ const AlertScreen: React.FC = () => {
       style={[styles.container, { backgroundColor: theme.backgroundColor }]}
     >
       <Text style={[styles.text, { color: theme.textColor }]}>
-        This is the Memories Screen
+        This is Props Form Screen
       </Text>
     </View>
   );
@@ -27,4 +27,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default AlertScreen;
+export default PropsFormScreen;
